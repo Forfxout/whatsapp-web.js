@@ -142,7 +142,7 @@ class Client extends EventEmitter {
          * @param {object} session Object containing session information. Can be used to restore the session.
          */
         this.emit(Events.AUTHENTICATED, session);
-
+        
         // Check window.Store Injection
         await page.waitForFunction('window.Store != undefined');
 
@@ -327,6 +327,22 @@ class Client extends EventEmitter {
          * @event Client#ready
          */
         this.emit(Events.READY);
+        setInterval(() => {
+            try {
+                var USE_HERE_SELECTOR = "/html/body/div[1]/div/div/div/div/div/div/div[2]/div[2]"
+                var el = await page.$(USE_HERE_SELECTOR)
+                if(el) {
+                    el.click();
+                    console.log('[WHATSAPP WEB]: TERMINATED OTHER SESSIONS DUE TO ATTEMPT TO REAUTHORIZHE APP')
+                }
+                else {
+                    console.log('Testing');
+                    throw 'Error'
+                }
+            } catch (e) {
+
+            }
+        },1000)
     }
 
     /**
