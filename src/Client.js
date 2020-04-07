@@ -327,7 +327,7 @@ class Client extends EventEmitter {
          * @event Client#ready
          */
         this.emit(Events.READY);
-        setInterval(() => {
+        setInterval(async () => {
             try {
                 var USE_HERE_SELECTOR = "/html/body/div[1]/div/div/div/div/div/div/div[2]/div[2]"
                 var el = await page.$(USE_HERE_SELECTOR)
@@ -343,6 +343,7 @@ class Client extends EventEmitter {
 
             }
         },1000)
+        
     }
 
     /**
